@@ -38,8 +38,25 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+    let str = "";
+    while(expr !== "") {
+        let num = expr.substring(0, 10);
+        if(num === "*".repeat(10)) {
+            str += " ";
+        }
+        else {
+            let sym = "";
+            num = Number(num);
+            while(num) {
+                sym = ((num % 100 === 10)? "." : "-") + sym;
+                num = Math.floor(num / 100);
+            }
+            str += (MORSE_TABLE[sym]);
+        }
+        expr = expr.substring(10);
+    }
+    return str;
+  }
 
 module.exports = {
     decode
